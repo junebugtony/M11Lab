@@ -4,18 +4,17 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Test AWS Lambda</title>
+  <title>Inventory Manager</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body>
-  <h1>Inventory Manager</h1>
-  <p id="lambda-info">
-    <!-- loaded with AJAX -->
-  </p>
 
+
+<body>
+
+  <h1>Inventory Manager</h1>
 
   <button id="load-data">Load/Refresh Data</button>
 
@@ -34,7 +33,7 @@
   </table>
 
   <script>
-    document.getElementById("load-data").onclick = function () {
+    function loadData() {
       let inventoryTableBody = document.getElementById("inventory-table-body");
       let xhr = new XMLHttpRequest();
 
@@ -60,7 +59,10 @@
 
           let buttonCell = document.createElement("td");
           let deleteButton = document.createElement("button");
+
           deleteButton.textContent = "Delete item";
+          deleteButton.classList.add("delete-item");
+
           deleteButton.onclick = function () {
             let xhr = new XMLHttpRequest();
             xhr.open("DELETE", `https://56s163a2v2.execute-api.us-west-2.amazonaws.com/items/${item.id}`);
@@ -79,6 +81,10 @@
       xhr.send();
     }
 
+    window.onload = loadData;
+
+    document.getElementById("load-data").onclick = loadData;
+
   </script>
 
   <div class="form-container">
@@ -86,38 +92,50 @@
       <h3>Add an item to inventory</h3>
 
       <div class="label-input">
-        <label for="itemID">ID:</label>
+        <label for="itemID"><b>ID:</b></label>
         <input type="text" id="itemID" name="itemID">
       </div>
 
       <div class="label-input">
-        <label for="itemName">Name:</label>
+        <label for="itemName"><b>Name:</b></label>
         <input type="text" id="itemName" name="itemName">
       </div>
 
       <div class="label-input">
-        <label for="itemPrice">Price:</label>
+        <label for="itemPrice"><b>Price:</b></label>
         <input type="text" id="itemPrice" name="itemPrice">
       </div>
 
-      <button id="add-item">Add item</button>
+      <button id="add-item" type="button">Add item</button>
+
+      <script>
+        document.getElementById("add-item").onclick = function () {
+
+          const itemID = document.getElementById("itemID").value;
+          const itemName = document.getElementById("itemName").value;
+          const itemPrice = document.getElementById("itemPrice").value;
+
+          let xhr = new XMLHttpRequest();
+          xhr.open("PUT", "https://56s163a2v2.execute-api.us-west-2.amazonaws.com/items");
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          xhr.addEventListener("load", function () {
+            loadData();
+          });
+
+          xhr.send(JSON.stringify({
+            "id": itemID,
+            "price": parseFloat(itemPrice),
+            "name": itemName
+          }));
+
+          document.getElementById("itemID").value = "";
+          document.getElementById("itemName").value = "";
+          document.getElementById("itemPrice").value = "";
+        }
+      </script>
     </form>
-
-    
-    <script>
-      document.getElementById("add-item").onclick = function () {
-        let xhr = new XMLHttpRequest();
-        xhr.open("PUT", "https://56s163a2v2.execute-api.us-west-2.amazonaws.com/items");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify({
-          "id": "11111",
-          "price": 19,
-          "name": "test put value"
-        }));
-      }
-    </script>
   </div>
-
 </body>
 
 </html>

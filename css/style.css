@@ -5,12 +5,23 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0;
+  font-family: monospace;
+}
+
+body h1 {
+  border-bottom: 2px solid;
+  width: 50%;
+  padding-bottom: 10px;
 }
 
 table {
   margin: 20px auto;
   border-collapse: collapse;
   width: 50%;
+}
+
+#load-data {
+  cursor: pointer;
 }
 
 #load-data:hover {
@@ -24,8 +35,14 @@ td, th {
 form {
   display: flex;
   flex-direction: column;
-  border: 2px solid;
+  border: 1px solid;
   padding: 0 50px 0 50px;
+}
+
+.form-container h3 {
+  border-bottom: 1px solid;
+  width: 100%;
+  margin: 0;
 }
 
 input {
@@ -51,8 +68,19 @@ label {
   width: 100%;
   align-self: center;
   margin: 10px auto;
+  cursor: pointer;
 }
 
 #add-item:hover {
   background-color: green;
+}
+
+.delete-item {
+  background-color: red;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.delete-item:hover {
+  background-color: #990000;
 }
