@@ -1,4 +1,58 @@
-h1{
-  border-color: #d3e644;
-  border-style: dashed;
+body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+#load-data:hover {
+  background-color: green;
+}
+
+td, th {
+  padding: 10px 40px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid;
+  padding: 0 50px 0 50px;
+}
+
+input {
+  padding: 5px;
+  margin: 10px 20px;
+  border: 1px solid;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+label {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.label-input {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+#add-item {
+  width: 100%;
+  align-self: center;
+  margin: 10px auto;
+}
+
+#add-item:hover {
+  background-color: green;
 }
