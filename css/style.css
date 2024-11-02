@@ -20,6 +20,10 @@ table {
   width: 50%;
 }
 
+thead tr {
+  background-color: rgb(168, 168, 168);
+}
+
 #load-data {
   cursor: pointer;
 }
